@@ -3,7 +3,7 @@ FROM nodesource/trusty:0.10
 MAINTAINER Nicola Molinari <emmenko@gmail.com>
 
 RUN apt-get update
-RUN apt-get install xvfb chromium-browser firefox -y
+RUN apt-get install git xvfb chromium-browser firefox -y
 
 # Autostart Xvfb
 ADD xvfb.sh /etc/init.d/xvfb
