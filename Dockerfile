@@ -1,4 +1,4 @@
-FROM nodesource/trusty:0.10
+FROM nodesource/trusty:0.12
 
 MAINTAINER Nicola Molinari <emmenko@gmail.com>
 
