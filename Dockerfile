@@ -1,18 +1,19 @@
-FROM nodesource/trusty:0.12
+FROM ubuntu:trusty
 
 MAINTAINER Nicola Molinari <emmenko@gmail.com>
 
-RUN apt-get update
-RUN apt-get install git xvfb chromium-browser firefox -y
+RUN apt-get update; \
+    apt-get install -y curl; \
+    curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -; \
+    curl https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - ; \
+    sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'; \
+    apt-get update && apt-get install -y google-chrome-stable nodejs Xvfb; \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Autostart Xvfb
 ADD xvfb.sh /etc/init.d/xvfb
-RUN chmod +x /etc/init.d/xvfb
-RUN echo /etc/init.d/xvfb start >> /root/.profile
+ADD entrypoint.sh /entrypoint.sh
 
 ENV DISPLAY :99.0
-ENV CHROME_BIN /usr/bin/chromium-browser
+ENV CHROME_BIN /usr/bin/google-chrome
 
-RUN node -v
-RUN npm i -g npm@2.7.3
-RUN npm -v
+ENTRYPOINT ["/entrypoint.sh"]
