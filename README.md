@@ -1,3 +1,5 @@
+<h1 align="center">This repository is deprecated and not maintained anymore</h1>
+
 A [Docker](https://www.docker.com/) container with
 
 - node 0.12
